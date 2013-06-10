@@ -41,7 +41,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.Geofence;
 import com.mns.walker.R;
 import com.mns.walker.main.MainActivity;
+import com.mns.walker.main.WalkerUtils;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,6 +78,9 @@ public class WalkerActivity extends FragmentActivity {
 
     // Persistent storage for geofences
     private SimpleGeofenceStore mPrefs;
+
+    // Persitent storage for walk definitions
+    private WalkerDefinitionStore walkerStore;
 
     // Store a list of geofences to add
     List<Geofence> mCurrentGeofences;
@@ -111,9 +117,9 @@ public class WalkerActivity extends FragmentActivity {
     // Handle to textview in the UI
     private TextView textView;
 
-
     private String walkId;
 
+    private WalkerDefinition walkerDefinition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,7 +183,17 @@ public class WalkerActivity extends FragmentActivity {
         // Get the message from the intent
         walkId = getIntent().getStringExtra(MainActivity.WALK_ID);
 
+        walkerStore = new WalkerDefinitionStore(this);
 
+        try {
+            walkerDefinition = walkerStore.loadWalkDefinitionFromFileSystem(walkId);
+        } catch (IOException e) {
+            Log.e(WalkerUtils.APPTAG, getResources().getString(R.string.sdcard_load_error), e);
+            Toast.makeText(this, getResources().getString(R.string.sdcard_load_error), Toast.LENGTH_SHORT).show();
+        } catch (XmlPullParserException e) {
+            Log.e(WalkerUtils.APPTAG, getResources().getString(R.string.xml_error), e);
+            Toast.makeText(this, getResources().getString(R.string.xml_error), Toast.LENGTH_SHORT).show();
+        }
     }
 
     /*

@@ -1,11 +1,8 @@
 package com.mns.walker.game;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.List;
 
-public class WalkerDefinition implements Parcelable{
+public class WalkerDefinition {
 
     private final String location;
     private final String title;
@@ -19,16 +16,6 @@ public class WalkerDefinition implements Parcelable{
         this.description = description;
         this.length = length;
         this.points = points;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
     }
 
     public static class WalkPoint {
