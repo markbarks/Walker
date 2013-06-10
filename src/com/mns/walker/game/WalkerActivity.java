@@ -30,8 +30,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -117,31 +115,26 @@ public class WalkerActivity extends FragmentActivity {
     // Handle to textview in the UI
     private TextView textView;
 
-    private String walkId;
-
     private WalkerDefinition walkerDefinition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Set the pattern for the latitude and longitude format
-        String latLngPattern = getString(R.string.lat_lng_pattern);
+        // Get the message from the intent
+        String walkId = getIntent().getStringExtra(MainActivity.WALK_ID);
 
-        // Set the format for latitude and longitude
-        mLatLngFormat = new DecimalFormat(latLngPattern);
+        walkerStore = new WalkerDefinitionStore(this);
 
-        // Localize the format
-        mLatLngFormat.applyLocalizedPattern(mLatLngFormat.toLocalizedPattern());
-
-        // Set the pattern for the radius format
-        String radiusPattern = getString(R.string.radius_pattern);
-
-        // Set the format for the radius
-        mRadiusFormat = new DecimalFormat(radiusPattern);
-
-        // Localize the pattern
-        mRadiusFormat.applyLocalizedPattern(mRadiusFormat.toLocalizedPattern());
+        try {
+            walkerDefinition = walkerStore.loadWalkDefinitionFromFileSystem(walkId);
+        } catch (IOException e) {
+            Log.e(WalkerUtils.APPTAG, getResources().getString(R.string.sdcard_load_error), e);
+            Toast.makeText(this, getResources().getString(R.string.sdcard_load_error), Toast.LENGTH_SHORT).show();
+        } catch (XmlPullParserException e) {
+            Log.e(WalkerUtils.APPTAG, getResources().getString(R.string.xml_error), e);
+            Toast.makeText(this, getResources().getString(R.string.xml_error), Toast.LENGTH_SHORT).show();
+        }
 
         // Create a new broadcast receiver to receive updates from the listeners and service
         mBroadcastReceiver = new GeofenceSampleReceiver();
@@ -178,22 +171,10 @@ public class WalkerActivity extends FragmentActivity {
 
         // Get handles to the Geofence editor fields in the UI
         imageView = (ImageView) findViewById(R.id.imageView);
+
         textView = (TextView) findViewById(R.id.textView);
 
-        // Get the message from the intent
-        walkId = getIntent().getStringExtra(MainActivity.WALK_ID);
-
-        walkerStore = new WalkerDefinitionStore(this);
-
-        try {
-            walkerDefinition = walkerStore.loadWalkDefinitionFromFileSystem(walkId);
-        } catch (IOException e) {
-            Log.e(WalkerUtils.APPTAG, getResources().getString(R.string.sdcard_load_error), e);
-            Toast.makeText(this, getResources().getString(R.string.sdcard_load_error), Toast.LENGTH_SHORT).show();
-        } catch (XmlPullParserException e) {
-            Log.e(WalkerUtils.APPTAG, getResources().getString(R.string.xml_error), e);
-            Toast.makeText(this, getResources().getString(R.string.xml_error), Toast.LENGTH_SHORT).show();
-        }
+        textView.setText(walkerDefinition.getTitle());
     }
 
     /*
@@ -293,63 +274,6 @@ public class WalkerActivity extends FragmentActivity {
 //            mRadius1.setText(
 //                    mRadiusFormat.format(
 //                            mUIGeofence1.getRadius()));
-//        }
-    }
-
-    /*
-     * Inflate the app menu
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu, menu);
-//        return true;
-
-    }
-
-    /*
-     * Respond to menu item selections
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-//        switch (item.getItemId()) {
-
-//            // Request to clear the geofence1 settings in the UI
-//            case R.id.menu_item_clear_geofence1:
-//                mLatitude1.setText(GeofenceUtils.EMPTY_STRING);
-//                mLongitude1.setText(GeofenceUtils.EMPTY_STRING);
-//                mRadius1.setText(GeofenceUtils.EMPTY_STRING);
-//                return true;
-//
-//            // Request to clear the geofence2 settings in the UI
-//            case R.id.menu_item_clear_geofence2:
-//                mLatitude2.setText(GeofenceUtils.EMPTY_STRING);
-//                mLongitude2.setText(GeofenceUtils.EMPTY_STRING);
-//                mRadius2.setText(GeofenceUtils.EMPTY_STRING);
-//                return true;
-//
-//            // Request to clear both geofence settings in the UI
-//            case R.id.menu_item_clear_geofences:
-//                mLatitude1.setText(GeofenceUtils.EMPTY_STRING);
-//                mLongitude1.setText(GeofenceUtils.EMPTY_STRING);
-//                mRadius1.setText(GeofenceUtils.EMPTY_STRING);
-//
-//                mLatitude2.setText(GeofenceUtils.EMPTY_STRING);
-//                mLongitude2.setText(GeofenceUtils.EMPTY_STRING);
-//                mRadius2.setText(GeofenceUtils.EMPTY_STRING);
-//                return true;
-//
-//            // Remove all geofences from storage
-//            case R.id.menu_item_clear_geofence_history:
-//                mPrefs.clearGeofence("1");
-//                mPrefs.clearGeofence("2");
-//                return true;
-//
-//            // Pass through any other request
-//            default:
-        return super.onOptionsItemSelected(item);
 //        }
     }
 

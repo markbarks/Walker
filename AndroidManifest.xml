@@ -36,6 +36,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+                android:name="com.mns.walker.game.WalkerActivity"
+                android:parentActivityName="com.mns.walker.main.MainActivity" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.mns.walker.main.MainActivity" />
+        </activity>
         <!--<service-->
                 <!--android:name="com.example.android.geofence.ReceiveTransitionsIntentService"-->
                 <!--android:exported="false"></service>-->

@@ -18,6 +18,26 @@ public class WalkerDefinition {
         this.points = points;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLength() {
+        return length;
+    }
+
+    public List<WalkPoint> getPoints() {
+        return points;
+    }
+
     public static class WalkPoint {
 
         private final double latitude;
@@ -32,6 +52,26 @@ public class WalkerDefinition {
             this.radius = radius;
             this.clue = clue;
             this.image = image;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+
+        public float getRadius() {
+            return radius;
+        }
+
+        public String getClue() {
+            return clue;
+        }
+
+        public String getImage() {
+            return image;
         }
     }
 }

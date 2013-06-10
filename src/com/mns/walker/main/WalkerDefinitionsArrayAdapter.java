@@ -8,12 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.mns.walker.R;
 
-public class CityArrayAdapter extends ArrayAdapter<String> {
+public class WalkerDefinitionsArrayAdapter extends ArrayAdapter<String> {
 
     private final Context context;
     private final String[] values;
 
-    public CityArrayAdapter(Context context, String[] values) {
+    public WalkerDefinitionsArrayAdapter(Context context, String[] values) {
         super(context, R.layout.list_mobile, values);
         this.context = context;
         this.values = values;

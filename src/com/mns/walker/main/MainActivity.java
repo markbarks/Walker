@@ -28,7 +28,7 @@ public class MainActivity extends ListActivity {
             //unpack assets to directory
             initWalkerFilesDirFromAssets();
 //            }
-            setListAdapter(new CityArrayAdapter(this, walkerFiles.list()));
+            setListAdapter(new WalkerDefinitionsArrayAdapter(this, walkerFiles.list()));
         }
     }
 
