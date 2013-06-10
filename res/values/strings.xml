@@ -8,6 +8,8 @@
     <string name="lat_lng_pattern">* ###.00000000;* -###.00000000</string>
     <string name="radius_pattern">* #.0000</string>
 
+    <string name="sdcard_load_error">Unable to load content. Check your SD card.</string>
+    <string name="xml_error">Error parsing XML.</string>
 
     <!-- UI -->
     <string name="geofence1">Geofence 1</string>

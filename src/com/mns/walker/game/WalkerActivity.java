@@ -481,55 +481,7 @@ public class WalkerActivity extends FragmentActivity {
         }
     }
 
-    /**
-     * Called when the user clicks the "Remove geofence 2" button
-     *
-     * @param view The view that triggered this callback
-     */
-    public void onUnregisterGeofence2Clicked(View view) {
-        /*
-         * Remove the geofence by creating a List of geofences to
-         * remove and sending it to Location Services. The List
-         * contains the id of geofence 2, which is "2".
-         * The removal happens asynchronously; Location Services calls
-         * onRemoveGeofencesByPendingIntentResult() (implemented in
-         * the current Activity) when the removal is done.
-         */
 
-        /*
-         * Record the removal as remove by list. If a connection error occurs,
-         * the app can automatically restart the removal if Google Play services
-         * can fix the error
-         */
-        mRemoveType = GeofenceUtils.REMOVE_TYPE.LIST;
-
-        // Create a List of 1 Geofence with the ID "2" and store it in the global list
-        mGeofenceIdsToRemove = Collections.singletonList("2");
-
-        /*
-         * Check for Google Play services. Do this after
-         * setting the request type. If connecting to Google Play services
-         * fails, onActivityResult is eventually called, and it needs to
-         * know what type of request was in progress.
-         */
-        if (!servicesConnected()) {
-
-            return;
-        }
-
-        // Try to remove the geofence
-        try {
-            mGeofenceRemover.removeGeofencesById(mGeofenceIdsToRemove);
-
-            // Catch errors with the provided geofence IDs
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (UnsupportedOperationException e) {
-            // Notify user that previous request hasn't finished.
-            Toast.makeText(this, R.string.remove_geofences_already_requested_error,
-                    Toast.LENGTH_LONG).show();
-        }
-    }
 
     /**
      * Called when the user clicks the "Register geofences" button.

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"
+      xmlns:re="http://purl.org/atompub/rank/1.0">
+    <title type="text">newest questions tagged android - Stack Overflow</title>
+    <link rel="self" href="http://stackoverflow.com/feeds/tag?tagnames=android&amp;amp;sort=newest"
+          type="application/atom+xml"/>
+    <link rel="alternate" href="http://stackoverflow.com/questions/tagged/?tagnames=android&amp;amp;sort=newest"
+          type="text/html"/>
+    <subtitle>most recent 30 from stackoverflow.com</subtitle>
+    <updated>2013-06-10T17:07:56Z</updated>
+    <id>http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest</id>
+    <creativeCommons:license>http://www.creativecommons.org/licenses/by-sa/3.0/rdf</creativeCommons:license>
+    <entry>
+        <id>http://stackoverflow.com/q/17029185</id>
+        <re:rank scheme="http://stackoverflow.com">0</re:rank>
+        <title type="text">Why onReceive get call multiple time in froyo and not in JellyBean</title>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags" term="java"/>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags" term="android"/>
+        <author>
+            <name>DarkVision</name>
+            <uri>http://stackoverflow.com/users/2142023</uri>
+        </author>
+        <link rel="alternate"
+              href="http://stackoverflow.com/questions/17029185/why-onreceive-get-call-multiple-time-in-froyo-and-not-in-jellybean"/>
+        <published>2013-06-10T17:04:56Z</published>
+        <updated>2013-06-10T17:04:56Z</updated>
+        <summary type="html">
+
+            &lt;p&gt;i have my application install in 2 different phone
+            one with android 2.3.5 and another in 4.2.1
+            the problem is on the one with 2.3.5 onreceive get call everytime
+            but for the other phone the method got call once and never get call again.&lt;/p&gt;
+
+            &lt;p&gt;I would like someone to explain me what cause android 4.2.1 not call onreceive multiple time.
+            Thank you.&lt;/p&gt;
+
+            &lt;pre&gt;&lt;code&gt; registerReceiver(new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            Log.v(&quot;ok&quot;,&quot;onreceive&quot;);
+            availableWifi = wifiManager.getScanResults(); // get all network
+            }
+            }, new IntentFilter(
+            WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+            wifiManager.startScan();
+            &lt;/code&gt;&lt;/pre&gt;
+
+        </summary>
+    </entry>
+    <entry>
+        <id>http://stackoverflow.com/q/17029101</id>
+        <re:rank scheme="http://stackoverflow.com">0</re:rank>
+        <title type="text">Android Volley give me an outOfMemory exception</title>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags" term="android"/>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags"
+                  term="outofmemoryerror"/>
+        <author>
+            <name>AJit</name>
+            <uri>http://stackoverflow.com/users/928907</uri>
+        </author>
+        <link rel="alternate"
+              href="http://stackoverflow.com/questions/17029101/android-volley-give-me-an-outofmemory-exception"/>
+        <published>2013-06-10T16:59:26Z</published>
+        <updated>2013-06-10T17:03:55Z</updated>
+        <summary type="html">
+
+            &lt;p&gt;I am using volley to showing images in horizontal swipe view from the server, but my images are
+            quite large that&#39;s way i am getting an exception of out of memory&lt;/p&gt;
+
+            &lt;p&gt;Below is my volley class:&lt;/p&gt;
+
+            &lt;pre&gt;&lt;code&gt;public class Volley{
+
+            private RequestQueue mRequestQueue;
+            private ImageLoader mImageLoader;
+
+            public Volley(Context ctx) {
+            Log.v(&quot;Volley&quot;, &quot;Volley onCreate&quot;);
+            mRequestQueue = com.android.volley.toolbox.Volley.newRequestQueue(ctx);
+
+            final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+            final int cacheSize = maxMemory / 8;
+
+            ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
+            LruCache&amp;lt;String, Bitmap&amp;gt; imageCache = new LruCache&amp;lt;String, Bitmap&amp;gt;(cacheSize);
+
+            @Override
+            public void putBitmap(String key, Bitmap value) {
+            imageCache.put(key, value);
+            }
+
+            @Override
+            public Bitmap getBitmap(String key) {
+            return imageCache.get(key);
+            }
+            };
+
+            mImageLoader = new ImageLoader(mRequestQueue, imageCache);
+
+            }
+
+            public void clear(Context ctx) {
+            mRequestQueue.cancelAll(ctx);
+            mImageLoader = null;
+            mRequestQueue = null;
+            }
+
+            public RequestQueue getRequestQueue() {
+            return mRequestQueue;
+            }
+
+            public ImageLoader getImageLoader() {
+            return mImageLoader;
+            }}
+            &lt;/code&gt;&lt;/pre&gt;
+
+            &lt;p&gt;Image loader code:&lt;/p&gt;
+
+            &lt;pre&gt;&lt;code&gt;image.setImageUrl(imagePhoto.url, getVolley(getContext()).getImageLoader());
+
+            public Volley getVolley(Context ctx) {
+            if(mVolley == null) {
+            mVolley = new Volley(getContext());
+            }
+            return mVolley;
+            }
+            &lt;/code&gt;&lt;/pre&gt;
+
+            &lt;h2&gt;Exception:&lt;/h2&gt;
+
+            &lt;blockquote&gt;
+            &lt;p&gt;06-10 22:14:27.462: E/AndroidRuntime(10060): FATAL EXCEPTION: Thread-29479
+            06-10 22:14:27.462: E/AndroidRuntime(10060): java.lang.OutOfMemoryError
+            06-10 22:14:27.462: E/AndroidRuntime(10060): at
+            com.android.volley.toolbox.ByteArrayPool.getBuf(ByteArrayPool.java:101)
+            06-10 22:14:27.462: E/AndroidRuntime(10060): at
+            com.android.volley.toolbox.PoolingByteArrayOutputStream.(PoolingByteArrayOutputStream.java:53)
+            06-10 22:14:27.462: E/AndroidRuntime(10060): at
+            com.android.volley.toolbox.BasicNetwork.entityToBytes(BasicNetwork.java:202)
+            06-10 22:14:27.462: E/AndroidRuntime(10060): at
+            com.android.volley.toolbox.BasicNetwork.performRequest(BasicNetwork.java:104)
+            06-10 22:14:27.462: E/AndroidRuntime(10060): at
+            com.android.volley.NetworkDispatcher.run(NetworkDispatcher.java:105)&lt;/p&gt;
+            &lt;/blockquote&gt;
+
+        </summary>
+    </entry>
+    <entry>
+        <id>http://stackoverflow.com/q/17029076</id>
+        <re:rank scheme="http://stackoverflow.com">2</re:rank>
+        <title type="text">how to place a rounded button at corner of a layout</title>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags" term="android"/>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags"
+                  term="android-layout"/>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags" term="design"/>
+        <author>
+            <name>Siva K</name>
+            <uri>http://stackoverflow.com/users/596364</uri>
+        </author>
+        <link rel="alternate"
+              href="http://stackoverflow.com/questions/17029076/how-to-place-a-rounded-button-at-corner-of-a-layout"/>
+        <published>2013-06-10T16:57:26Z</published>
+        <updated>2013-06-10T17:05:35Z</updated>
+        <summary type="html">
+
+            &lt;p&gt;I am trying to place a rounded button over the edge of two edit boxes which are in vertical mode as
+            in the following figure&lt;img src=&quot;http://i.stack.imgur.com/B7jvg.png&quot; alt=&quot;enter image
+            description here&quot;&gt;&lt;/p&gt;
+
+            &lt;p&gt;How to implement this design, pls help me friends.....&lt;/p&gt;
+
+        </summary>
+    </entry>
+    <entry>
+        <id>http://stackoverflow.com/q/17029066</id>
+        <re:rank scheme="http://stackoverflow.com">-2</re:rank>
+        <title type="text">Image uploading in fix intervals by Android background service</title>
+        <category scheme="http://stackoverflow.com/feeds/tag?tagnames=android&amp;sort=newest/tags" term="android"/>
+        <author>
+            <name>Milinda Saranga</name>
+            <uri>http://stackoverflow.com/users/1363177</uri>
+        </author>
+        <link rel="alternate"
+              href="http://stackoverflow.com/questions/17029066/image-uploading-in-fix-intervals-by-android-background-service"/>
+        <published>2013-06-10T16:56:54Z</published>
+        <updated>2013-06-10T16:56:54Z</updated>
+        <summary type="html">
+
+            &lt;p&gt;How to upload images in sd card in fix intervals(30 minutes) by android background service?&lt;/p&gt;
+
+        </summary>
+    </entry>
+</feed>

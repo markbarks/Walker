@@ -1,8 +1,22 @@
-<locations>
-    <location>
-        <id>1</id>
+<?xml version="1.0" encoding="utf-8"?>
+
+<definition>
+    <location>Amsterdam</location>
+    <title>Fun in the 'Dam</title>
+    <length>1h</length>
+    <description>The first walker</description>
+    <point>
         <latitude>23.004324324</latitude>
         <longitude>4.4343543</longitude>
         <radius>10</radius>
-    </location>
-</locations>
+        <clue>clue 1</clue>
+        <image>image 1</image>
+    </point>
+    <point>
+        <latitude>24.004324324</latitude>
+        <longitude>4.4343543</longitude>
+        <radius>10</radius>
+        <clue>clue 2</clue>
+        <image>image 2</image>
+    </point>
+</definition>
